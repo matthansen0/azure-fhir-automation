@@ -1,5 +1,5 @@
 # Azure FHIR Automation
-Automation scripts for Azure API for FHIR OpenHack Challenges
+Automation scripts for Azure API for FHIR OpenHack Challenges from [https://github.com/microsoft/OpenHack-FHIR](https://github.com/microsoft/OpenHack-FHIR).
 
 ## Assumptions for Challenge01 Automation:
 
