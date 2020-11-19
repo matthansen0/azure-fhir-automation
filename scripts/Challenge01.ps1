@@ -78,6 +78,7 @@ gci -recurse azcopy.exe | cp -Destination .
 
 ## Upload Sample FHIR Data
 Write-host "uploading sample FHIR data to be processed"
+Write-Host "Look at the output below, you need to authenticate on behalf of AzCopy." -ForegroundColor Red -BackgroundColor Yellow
 
 .\azcopy.exe login
 $storageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $myenv -AccountName $storageAccountName).Value[0]
@@ -88,5 +89,7 @@ $containerSASURI = New-AzStorageContainerSASToken -Context $destinationContext -
 ## Validate data in container
 $importStorageContext = (Get-AzStorageAccount -ResourceGroupName $myenv -AccountName $storageAccountName).Context
 write-host "The number of blobs left in the container is:" (Get-AzStorageBlob -Container $storageContainerName -Context $importStorageContext).count
-write-host "Now that this script is complete for Challenge01, you can run lines 6-18 in this script to clean out the environment."
+write-host "Now that this script is complete for Challenge01, you can run lines 6-18 in this script to clean out the environment." -ForegroundColor Green
+write-host "If you want to throw caution to the wind, you could also just copy/paste the generated code below." -ForegroundColor Yellow
+write-host "$generateDeleteEverything" -ForegroundColor Red
 ## Add Loop here to check for count of blobs in container, continue when empty.
