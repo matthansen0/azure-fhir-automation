@@ -14,4 +14,4 @@ Note: Due to the length of some of the file names and paths it is reccomended th
 
 ### Cleanup: 
 
-To cleanup the entire environment from Challenge01, you can run lines 6-18 in the script, then execute ```$deleteEverything```, and copy/past the output 1-line command and it will delete both resource groups, all of the resources, along with the user and the app registrations in AAD. This will take 15-20 minutes. 
+To cleanup the entire environment from Challenge01, you can run lines 6-18 in the script, then execute ```$generateDeleteEverything```, and copy/past the output 1-line command and it will delete both resource groups, all of the resources, along with the user and the app registrations in AAD. This will take 15-20 minutes. 

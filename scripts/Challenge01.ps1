@@ -15,7 +15,7 @@ $rg2 = $myenv + "-sof"
 #Do not edit this.
 
 $showAppsAndUsersInSecondTenant ="Connect-AzureAd -TenantDomain $secondTenant; Get-AzureADApplication -All:$true; Get-AzureADUser -searchstring $myenv"
-$deleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force"
+$generateDeleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force"
 ## The above commands are assuming you're using an empty tenant for the app registrations and users, DO NOT USE THIS AS-IS IN ANY OTHER ENVIRONMENT.
 
 Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information."
