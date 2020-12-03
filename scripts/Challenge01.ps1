@@ -18,22 +18,22 @@ $showAppsAndUsersInSecondTenant ="Connect-AzureAd -TenantDomain $secondTenant; G
 $generateDeleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force"
 ## The above commands are assuming you're using an empty tenant for the app registrations and users, DO NOT USE THIS AS-IS IN ANY OTHER ENVIRONMENT.
 
-Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information."
+Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information." -ForegroundColor Green
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
-Write-Host "Lastly, this script will prompt you for authentication multiple times including once where you will need to visit microsoft.com/devicelogin, this will be addressed in future versions. Press any key to acknowledge this information."
+Write-Host "Lastly, this script will prompt you for authentication multiple times including once where you will need to visit microsoft.com/devicelogin, this will be addressed in future versions. Press any key to acknowledge this information." -ForegroundColor Green
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 ##########################################################
 ##########################################################
 
 ## Login to Primary Tenant and Sub
-Write-host "login to the primary tenant and sub"
+Write-host "Task: Login to the Primary Tenant and Subscription (popup login prompt)." -ForegroundColor Green
 Login-AzAccount
 Set-AzContext -TenantId $TenantId -SubscriptionId $SubscriptionId
 
 ## Login to secondary Tenant
-Write-host "login to the secondary tenant"
+Write-host "Task: Login to the Secondary Tenant (popup login prompt)." -ForegroundColor Green
 Connect-AzureAd -TenantDomain $secondTenant
 
 ##########################################################
@@ -43,14 +43,14 @@ Connect-AzureAd -TenantDomain $secondTenant
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy ByPass
 
 ## Download FHIR Deployment Scripts
-Write-host "downloading and extracting the FHIR deployment scripts"
+Write-host "Downloading and extracting the FHIR deployment scripts..."
 wget https://github.com/microsoft/OpenHack-FHIR/blob/main/Scripts/fhir-server-samples.zip?raw=true -OutFile fhir-server-samples.zip
 Expand-Archive -LiteralPath fhir-server-samples.zip -DestinationPath .
 Set-Location fhir-server-samples/deploy/scripts
 ## Note, I'ved tried calling the environment setup script by full path to get rid of these change directory commands but it throws a ton of errors because the script calls other scripts that it assumes are in the same directory.
 
 ## Deploy Environment 
-Write-host "deploying your environment, this could take 15-20 minutes"
+Write-host "Deploying your environment, this could take 15-20 minutes..."
 .\Create-FhirServerSamplesEnvironment.ps1 -EnvironmentName $myenv -EnvironmentLocation eastus -UsePaaS $true -EnableExport $true
 
 ### Need to Add deployment validation here
@@ -66,18 +66,18 @@ $storageContainerName = "fhirimport"
 Set-Location $workingFolder
 
 ## Download Sample FHIR Data
-Write-host "downloading and extracting FHIR sample data"
+Write-host "Downloading and extracting FHIR sample data..."
 Wget https://github.com/microsoft/OpenHack-FHIR/blob/main/Synthea/fhir.zip?raw=true -OutFile fhir.zip
 Expand-Archive -LiteralPath fhir.zip -DestinationPath .
 wget https://aka.ms/downloadazcopy-v10-windows -outfile azcopy.zip
 
 ## Download AzCopy
-Write-host "downloading AzCopy"
+Write-host "Downloading AzCopy..."
 Expand-Archive -LiteralPath azcopy.zip -DestinationPath .
 gci -recurse azcopy.exe | cp -Destination .
 
 ## Upload Sample FHIR Data
-Write-host "uploading sample FHIR data to be processed"
+Write-host "Uploading sample FHIR data to be processed..."
 Write-Host "Look at the output below, you need to authenticate on behalf of AzCopy." -ForegroundColor Red -BackgroundColor Yellow
 
 .\azcopy.exe login
