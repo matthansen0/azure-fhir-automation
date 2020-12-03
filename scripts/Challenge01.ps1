@@ -3,10 +3,10 @@
 ##########################################################
 
 
-$SubscriptionId = Read-Host -Prompt "Input the primary subscription ID"
-$TenantId = Read-Host -Prompt "Input the primary tenant ID"
-$secondTenant = Read-Host -Prompt "Input the secondary tenant ID"
-$myenv = Read-Host -Prompt "Input a name for your environment, it must be 12 characters or less"
+$SubscriptionId = Read-Host -Prompt "Input the primary subscription ID" -ForegroundColor Green
+$TenantId = Read-Host -Prompt "Input the primary tenant ID" -ForegroundColor Green
+$secondTenant = Read-Host -Prompt "Input the secondary tenant ID" -ForegroundColor Green
+$myenv = Read-Host -Prompt "Input a name for your environment, it must be 12 characters or less" -ForegroundColor Green
 ## $myenv must be 12 characters or less.
 
 $workingFolder = Read-Host -Prompt "Input your working folder, eg. C:\fhirautomation"
@@ -18,22 +18,22 @@ $showAppsAndUsersInSecondTenant ="Connect-AzureAd -TenantDomain $secondTenant; G
 $generateDeleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force"
 ## The above commands are assuming you're using an empty tenant for the app registrations and users, DO NOT USE THIS AS-IS IN ANY OTHER ENVIRONMENT.
 
-Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information." -ForegroundColor Green
+Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information." -ForegroundColor Yellow
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
-Write-Host "Lastly, this script will prompt you for authentication multiple times including once where you will need to visit microsoft.com/devicelogin, this will be addressed in future versions. Press any key to acknowledge this information." -ForegroundColor Green
+Write-Host "Lastly, this script will prompt you for authentication multiple times including once where you will need to visit microsoft.com/devicelogin, this will be addressed in future versions. Press any key to acknowledge this information." -ForegroundColor Yellow
 $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 ##########################################################
 ##########################################################
 
 ## Login to Primary Tenant and Sub
-Write-host "Task: Login to the Primary Tenant and Subscription (popup login prompt)." -ForegroundColor Green
+Write-host "Login to the Primary Tenant and Subscription (popup login prompt)." -ForegroundColor Yellow
 Login-AzAccount
 Set-AzContext -TenantId $TenantId -SubscriptionId $SubscriptionId
 
 ## Login to secondary Tenant
-Write-host "Task: Login to the Secondary Tenant (popup login prompt)." -ForegroundColor Green
+Write-host "Login to the Secondary Tenant (popup login prompt)." -ForegroundColor Yellow
 Connect-AzureAd -TenantDomain $secondTenant
 
 ##########################################################
