@@ -50,7 +50,7 @@ Set-Location fhir-server-samples/deploy/scripts
 ## Note, I'ved tried calling the environment setup script by full path to get rid of these change directory commands but it throws a ton of errors because the script calls other scripts that it assumes are in the same directory.
 
 ## Deploy Environment 
-Write-host "Deploying your environment, this could take 15-20 minutes..."
+Write-host "Deploying your environment, this could take 15-20 minutes..." -ForegroundColor Green
 .\Create-FhirServerSamplesEnvironment.ps1 -EnvironmentName $myenv -EnvironmentLocation eastus -UsePaaS $true -EnableExport $true
 
 ### Need to Add deployment validation here
