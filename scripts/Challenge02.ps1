@@ -1,3 +1,5 @@
+Write-Host "This script is still in development, it may not work. - Matt"
+
 ##########################################################
 ####                   Challenge #2                   ####
 ##########################################################
@@ -62,7 +64,7 @@ Write-Host "Secret Value is:" $svcClientSecretValue
 ##########################################################
 ##########################################################
 
-Set-Location $myenv
+Set-Location $workingFolder
 
 ## Download Health Architectures Master
 Write-host "Downloading and extracting the Health Architectures Zip File..."
@@ -77,8 +79,3 @@ Set-Location "$workingFolder\health-architectures-master\HL7Conversion"
 Wget https://github.com/matthansen0/azure-fhir-automation/blob/main/scripts/resources/customized-fhirhl7deployment.ps1?raw=true -OutFile customized-fhirhl7deployment.ps1
 
 .\customized-fhirhl7deployment.ps1
-
-
-
-
-

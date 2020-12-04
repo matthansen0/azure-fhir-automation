@@ -93,3 +93,5 @@ write-host "Now that this script is complete for Challenge01, you can run lines 
 write-host "If you want to throw caution to the wind, you could also just copy/paste the generated code below." -ForegroundColor Yellow
 write-host "$generateDeleteEverything" -ForegroundColor Red
 ## Add Loop here to check for count of blobs in container, continue when empty.
+
+Set-Location $workingFolder
