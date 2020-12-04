@@ -3,10 +3,10 @@
 ##########################################################
 
 
-$SubscriptionId = Read-Host -Prompt "Input the primary subscription ID" -ForegroundColor Green
-$TenantId = Read-Host -Prompt "Input the primary tenant ID" -ForegroundColor Green
-$secondTenant = Read-Host -Prompt "Input the secondary tenant ID" -ForegroundColor Green
-$myenv = Read-Host -Prompt "Input a name for your environment, it must be 12 characters or less" -ForegroundColor Green
+$SubscriptionId = Read-Host -Prompt "Input the primary subscription ID"
+$TenantId = Read-Host -Prompt "Input the primary tenant ID"
+$secondTenant = Read-Host -Prompt "Input the secondary tenant ID"
+$myenv = Read-Host -Prompt "Input a name for your environment, it must be 12 characters or less"
 ## $myenv must be 12 characters or less.
 
 $workingFolder = Read-Host -Prompt "Input your working folder, eg. C:\fhirautomation"
@@ -15,7 +15,7 @@ $rg2 = $myenv + "-sof"
 #Do not edit this.
 
 $showAppsAndUsersInSecondTenant ="Connect-AzureAd -TenantDomain $secondTenant; Get-AzureADApplication -All:$true; Get-AzureADUser -searchstring $myenv"
-$generateDeleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force"
+$generateDeleteEverything ="Connect-AzureAd -TenantDomain $secondTenant; Remove-AzResourceGroup -Name $myenv -Force; Remove-AzResourceGroup -Name $rg2 -Force; Remove-AzureADApplication -All:$true; Remove-AzureADUser -searchstring $myenv"
 ## The above commands are assuming you're using an empty tenant for the app registrations and users, DO NOT USE THIS AS-IS IN ANY OTHER ENVIRONMENT.
 
 Write-Host "After this script is complete, you can run lines 6-18 to clean out the environment. Press any key to acknowledge this information." -ForegroundColor Yellow
